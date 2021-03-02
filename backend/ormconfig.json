@@ -1,0 +1,8 @@
+{
+    "type": "sqlite",
+    "database": "./database/bancoDeDados.sqlite",
+    "migrations": ["./database/migrations/**.ts"],
+    "cli": {
+        "migrationsDir": "./database/migrations"
+    }
+ }

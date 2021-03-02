@@ -1,9 +1,9 @@
-import { Column, CreateDateColumn, Entity } from "typeorm"
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm"
 import { v4 as uuid } from 'uuid';
 
 @Entity("users")
 class Users {
-    @Column()
+    @PrimaryColumn()
     readonly id: string;
 
     @Column()

@@ -1,6 +1,7 @@
 {
     "type": "sqlite",
     "database": "./database/bancoDeDados.sqlite",
+    "entities": ["./src/models/**.ts"],
     "migrations": ["./database/migrations/**.ts"],
     "cli": {
         "migrationsDir": "./database/migrations"

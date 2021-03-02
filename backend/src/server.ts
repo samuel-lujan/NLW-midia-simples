@@ -1,15 +1,14 @@
+import 'reflect-metadata';
+import "../database"
 import express from 'express';
+import { router } from './routes';
 
 const app = express();
 
+app.use(express.json());
 
-app.get('/', (request, response) => {
-    response.status(200).json({
-        message: 'message'
-    })
-})
+app.use(router);
 
-
-app.listen(3000, () => {
-    console.log('foi');
-})
+app.listen(3000, () => 
+    console.log('foi')
+);

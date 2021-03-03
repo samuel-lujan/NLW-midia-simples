@@ -1,0 +1,13 @@
+.background {
+    background: url('../../../public/imagens/bg.png') center center no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+.label{
+    color: #fff;
+}
+
+#botao{
+    border-radius: 30px;
+}
+

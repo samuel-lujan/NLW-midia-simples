@@ -2,13 +2,29 @@ import styles from '../styles/pages/Home.module.css';
 
 export default function Home() {
   return (
-    <div className="row">
-        <div className="col">
-            <h1>Teste</h1>
+    <div className={styles.background}>
+      <div className="container" style={{height: '100vh'}}>
+        <div className="d-flex align-items-center">
+          <div className="col-9">
+            <div className="form">
+              <h3 className={styles.label}>Preencha seus dados</h3>
+              <form action="">
+                <div className="form-group">
+                  <label className={styles.label} htmlFor="name" required>Nome:</label>
+                  <input type="text" id="name" name="name" className="form-control" placeholder="Insira seu nome"/>
+                </div>
+                <div className="form-group">
+                  <label className={styles.label} htmlFor="email" required>Email:</label>
+                  <input type="email" id="email" name="email" className="form-control" placeholder="Insira seu email"/>
+                </div>
+                <div className="form-group text-center">
+                  <button className='btn btn-success' id="botao">Responder</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="col">
-          <h2>Teste2</h2>
-        </div>
+      </div>
     </div>
   )
 }

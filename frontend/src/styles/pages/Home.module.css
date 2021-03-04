@@ -3,6 +3,13 @@
     background-size: cover;
     height: 100%;
 }
+
+.centerForm{
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .label{
     color: #fff;
 }
@@ -11,3 +18,8 @@
     border-radius: 30px;
 }
 
+.form{
+    min-width: 300px;
+    width: 600px;
+
+}

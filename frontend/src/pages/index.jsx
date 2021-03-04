@@ -1,10 +1,11 @@
 import styles from '../styles/pages/Home.module.css';
+import cx from 'classnames';
 
 export default function Home() {
   return (
-    <div className={styles.background}>
+    <div className={cx(styles.background, 'pt-5')}>
       <div className="container" style={{height: '100vh'}}>
-        <div className="d-flex align-items-center">
+        <div className="px-auto">
           <div className="col-9">
             <div className="form">
               <h3 className={styles.label}>Preencha seus dados</h3>

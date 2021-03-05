@@ -10,7 +10,7 @@ export class CreateSurveys1614941413833 implements MigrationInterface {
                 [
                     {
                         name: 'id',
-                        type: 'int',
+                        type: 'integer',
                         isPrimary: true,
                         isGenerated: true,
                         generationStrategy: 'increment',

@@ -15,7 +15,7 @@ class UserController {
         });
 
         if(userAlreadyExists){
-            return response.status(400).json({
+            return response.status(409).json({
                 error: 'This user already exists!',
             });
         }

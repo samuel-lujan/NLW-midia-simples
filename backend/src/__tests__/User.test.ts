@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { app } from '../../src/app';
-import createConnection from '../../database/index';
+import createConnection from '../../database';
 
 describe("Users", () => {
     beforeAll(async () => {
@@ -10,8 +10,8 @@ describe("Users", () => {
 
     it("The test should be able to create a new user", async ()=> {
         const response = await request(app).post('/users').send({
-            email: "teste1@teste.com",
-            name: "Usuário de teste",
+            email: "a@teste.com",
+            name: "a de teste",
         });
 
         expect(response.status).toBe(201);

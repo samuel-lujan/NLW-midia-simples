@@ -5,6 +5,9 @@ import createConnection from '../../database/index';
 describe("Users", () => {
     beforeAll(async () => {
         const connection = await createConnection();
+        
+        await connection.dropDatabase();
+        
         await connection.runMigrations();
     });
 

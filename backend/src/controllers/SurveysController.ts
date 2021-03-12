@@ -19,7 +19,16 @@ class SurveysController{
         return response.status(201).json(survey);
     }
 
+    async index(request: Request, response: Response){
+        const sRepository = getCustomRepository(SurveysRepository);
+        const all = await sRepository.find();
+
+        return response.status(200).json(all);
+    }
+
     async show(request: Request, response: Response){
+        const { idSurveyUser } = request.params;
+
         const sRepository = getCustomRepository(SurveysRepository);
         const all = await sRepository.find();
 

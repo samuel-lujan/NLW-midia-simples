@@ -15,11 +15,12 @@ export default function Home() {
         name,
         email
       });
+      
       alert('Cadastrado com sucesso');
     } catch (error){
       console.log(error);
     }
-    
+
   }
   return (
     <div className={cx(styles.background)}>

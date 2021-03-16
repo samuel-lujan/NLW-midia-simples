@@ -40,6 +40,8 @@ class SurveysUsersController {
 
         const surveysUsersRespository = getCustomRepository(SurveysUsersRespository);
 
+        const surveyRepository = getCustomRepository(SurveysRepository);
+
         let surveyUser = await surveysUsersRespository.findOne({id: idSurveyUser})
         
         if(!surveyUser){
@@ -52,10 +54,25 @@ class SurveysUsersController {
 
         surveysUsersRespository.save(surveyUser);
         
-        console.log(surveyUser);
+        //selecionar proxima pergunta
+        const next = await surveysUsersRespository.findOne({where:{value: null, user_id: surveyUser.user_id}});
+
+        if(!next){
+            return response.status(200).json({
+                has_next: false,
+                success: "Updated successfully",   
+            });
+        }
+
+        const survey =  await surveyRepository.findOne(next.survey_id);
+
+        console.log(survey);
 
         return response.status(200).json({
-            success: "Updated successfully",
+            has_next: true,
+            success: "Updated successfully",   
+            title: survey.title,
+            description: survey.description
         });
     }
 }

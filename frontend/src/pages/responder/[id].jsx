@@ -34,7 +34,7 @@ export default function Responder({ id }) {
 
   return (
     <div>
-      <div className="container">
+      <div className="container mt-5">
         <div className="card">
           <div className="card-header">Consulta NPS</div>
           <div className="card-body">

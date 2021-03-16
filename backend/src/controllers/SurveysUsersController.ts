@@ -71,6 +71,7 @@ class SurveysUsersController {
         return response.status(200).json({
             has_next: true,
             success: "Updated successfully",   
+            id: next.id,
             title: survey.title,
             description: survey.description
         });

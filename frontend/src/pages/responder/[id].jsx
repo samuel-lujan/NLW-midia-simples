@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
-export default function Responder({ id }) {
+export default function Responder({ firstQuestionSurveyUserId }) {
   const [pergunta, setPergunta] = useState({});
 
   useEffect(() => {
@@ -9,23 +9,28 @@ export default function Responder({ id }) {
     async function getRespostas() {
       try {
 
-        if (id) {
-          const { data } = await api.get(`/surveys/users/${id}`);
+        if (firstQuestionSurveyUserId) {
+          const { data } = await api.get(`/surveys/users/${firstQuestionSurveyUserId}`);
           setPergunta(data);
         }
       } catch (err) {
         console.error(err);
       }
     }
-    console.log(id);
+    console.log(firstQuestionSurveyUserId);
     getRespostas();
   }, []);
 
   async function handleSubmit(nota) {
     try {
-      await api.put(`/surveys/users/${id}`, {
+      const { data } = await api.put(`/surveys/users/${firstQuestionSurveyUserId}`, {
         newValue: nota,
       });
+      if (data.has_next) {
+        setPergunta({
+
+        })
+      }
       alert("Obrigado pelo feedback");
     } catch (err) {
       console.error(err);
@@ -59,8 +64,8 @@ export default function Responder({ id }) {
 }
 
 Responder.getInitialProps = (ctx) => {
-  const { id } = ctx.query;
+  const { firstQuestionSurveyUserId } = ctx.query;
   return {
-    id
+    firstQuestionSurveyUserId
   }
 }

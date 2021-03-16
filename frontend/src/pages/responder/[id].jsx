@@ -1,37 +1,44 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
-export default function Responder({ firstQuestionSurveyUserId }) {
+export default function Responder({ firstSurveyUserId }) {
   const [pergunta, setPergunta] = useState({});
+  const [surveyUserId, setSurveyUserId] = useState(firstSurveyUserId);
+  const [hasFinished, setHasFinished] = useState(false);
 
   useEffect(() => {
-
     async function getRespostas() {
       try {
-
-        if (firstQuestionSurveyUserId) {
-          const { data } = await api.get(`/surveys/users/${firstQuestionSurveyUserId}`);
+        if (surveyUserId) {
+          const { data } = await api.get(`/surveys/users/${surveyUserId}`);
           setPergunta(data);
         }
       } catch (err) {
         console.error(err);
       }
     }
-    console.log(firstQuestionSurveyUserId);
+    console.log(surveyUserId);
     getRespostas();
   }, []);
 
   async function handleSubmit(nota) {
     try {
-      const { data } = await api.put(`/surveys/users/${firstQuestionSurveyUserId}`, {
+      const { data } = await api.put(`/surveys/users/${surveyUserId}`, {
         newValue: nota,
       });
+
       if (data.has_next) {
         setPergunta({
-
-        })
+          title: data.title,
+          description: data.description,
+        });
+        setSurveyUserId(data.id);
       }
-      alert("Obrigado pelo feedback");
+
+      if (!data.has_next) {
+        alert("Obrigado pelo feedback");
+        setHasFinished(true);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -47,15 +54,24 @@ export default function Responder({ firstQuestionSurveyUserId }) {
             <h5>{pergunta.description}</h5>
           </div>
           <div className="card-footer d-flex w-100 align-items-center justify-content-center">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((nota) => (
-              <button
-                onClick={() => handleSubmit(nota)}
-                className="btn btn-primary m-1"
-                key={nota}
-              >
-                {nota}
-              </button>
-            ))}
+            {hasFinished && (
+              <div>
+                <p>Obrigado por responder</p>
+              </div>
+            )}
+            {!hasFinished && (
+              <div>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((nota) => (
+                  <button
+                    onClick={() => handleSubmit(nota)}
+                    className="btn btn-primary m-1"
+                    key={nota}
+                  >
+                    {nota}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -64,8 +80,9 @@ export default function Responder({ firstQuestionSurveyUserId }) {
 }
 
 Responder.getInitialProps = (ctx) => {
-  const { firstQuestionSurveyUserId } = ctx.query;
+  const { id } = ctx.query;
+  console.log(ctx.query);
   return {
-    firstQuestionSurveyUserId
-  }
-}
+    firstSurveyUserId: id,
+  };
+};

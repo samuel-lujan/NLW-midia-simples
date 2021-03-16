@@ -52,7 +52,7 @@ class SurveysUsersController {
 
         surveyUser.value = newValue;
 
-        surveysUsersRespository.save(surveyUser);
+        await surveysUsersRespository.save(surveyUser);
         
         //selecionar proxima pergunta
         const next = await surveysUsersRespository.findOne({where:{value: null, user_id: surveyUser.user_id}});
